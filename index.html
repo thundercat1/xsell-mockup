@@ -65,10 +65,10 @@
 
 				<div class="col-md-4">
 					<form ng-submit="getRecommendation(slot1, input1)" >
-						<input type="text" class="form-control form-control-lg"  placeholder="Slot 1" ng-model="input1" ng-blur="getRecommendation(slot1, input1)" tabindex=2>
+						<input type="text" class="form-control form-control-lg" placeholder="Slot 1" ng-model="input1" ng-blur="getRecommendation(slot1, input1)" tabindex=2>
 					</form>
 
-					<div ng-repeat="item in slot1" class="col-md-8 col-md-offset-2">
+					<div ng-repeat="item in slot1" class="col-md-8 col-md-offset-2" ng-class="{muted: $index != 0}">
 						<a ng-href="{{item.url}}" class="thumbnail headspace" target="_blank">
 							<img ng-src="{{item.imageUrl}}">
 						</a>
@@ -82,7 +82,7 @@
 						<input type="text" class="form-control form-control-lg"  placeholder="Slot 2" ng-model="input2" ng-blur="getRecommendation(slot2, input2)" tabindex=3>
 					</form>
 
-					<div ng-repeat="item in slot2" class="col-md-8 col-md-offset-2">
+					<div ng-repeat="item in slot2" class="col-md-8 col-md-offset-2" ng-class="{muted: $index != 0}">
 						<a ng-href="{{item.url}}" class="thumbnail headspace" target="_blank">
 							<img ng-src="{{item.imageUrl}}">
 						</a>
@@ -96,7 +96,7 @@
 						<input type="text" class="form-control form-control-lg"  placeholder="Slot 3" ng-model="input3" ng-blur="getRecommendation(slot3, input3)" tabindex=4>
 					</form>
 
-					<div ng-repeat="item in slot3" class="col-md-8 col-md-offset-2">
+					<div ng-repeat="item in slot3" class="col-md-8 col-md-offset-2" ng-class="{muted: $index != 0}">
 						<a ng-href="{{item.url}}" class="thumbnail headspace" target="_blank">
 							<img ng-src="{{item.imageUrl}}">
 						</a>
@@ -107,14 +107,11 @@
 			</div>
 		</div>
 
-
 		<!--end body container-->
 	</div>
-	<div class="footer headspace">
-		<div class="container">
-			<p class="text-muted">A preview of things to come</p>
-		</div>
-	</div>
+	<footer>
+		<div id="bottom" class="text-muted">A preview of things to come</div>
+	</footer>
 </div>
 
 

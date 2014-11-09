@@ -1,10 +1,10 @@
-
 var angularApp = angular.module('xsellMockApp', []);
 
 
-angularApp.controller('xsellMockController', function($scope, $http) {
+angularApp.controller('xsellMockController', ['$scope', '$http', '$anchorScroll', '$location', function($scope, $http, $anchorScroll, $location) {
 
 	bcsUrl = 'http://www.backcountry.com';
+	$scope.crossSellSlots = ['1','2','3'];
 
 	$scope.resetKeystone = function() {
 		$scope.keystone = {};
@@ -17,6 +17,16 @@ angularApp.controller('xsellMockController', function($scope, $http) {
 		$scope.slot2 = [{}, {}, {}];
 		$scope.slot3 = [{}, {}, {}];
 	};
+
+	$scope.gotoBottom = function() {
+		// set the location.hash to the id of
+		// the element you wish to scroll to.
+		$location.hash('bottom');
+
+		// call $anchorScroll()
+		$anchorScroll();
+	};
+
 	$scope.resetSlots();
 	$scope.resetKeystone();
 
@@ -29,7 +39,6 @@ angularApp.controller('xsellMockController', function($scope, $http) {
 		style = style.toUpperCase();
 		if (style != $scope.keystone.style) {
 
-			$scope.resetSlots();
 			$scope.keystone = {};
 			$scope.keystone.imageUrl = 'spinner.gif';
 			$scope.keystone.style = style;
@@ -52,7 +61,6 @@ angularApp.controller('xsellMockController', function($scope, $http) {
 						console.log($scope.keystone);
 						$scope.keystone.title = "Error finding sku. Try again.";
 					});
-	
 		};
 	};
 
@@ -79,15 +87,11 @@ angularApp.controller('xsellMockController', function($scope, $http) {
 						};
 	
 					data.products.forEach(function(product) {
-						console.log(product);
-	
 						slot.push({'title': product.title, 'brand': product.brand.name, 'url': bcsUrl + product.skus[0].url, 'imageUrl': bcsUrl + product.skus[0].image.url});
-						console.log(slot);
 					});
-	
-	
+					$scope.gotoBottom();
 				});
 		};
 	};
 
-});
+}]);
