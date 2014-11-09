@@ -1,5 +1,4 @@
-<!doctype HTML>
-
+<!doctype HTML> 
 <!--   Find this page at localhost:8090   -->
 
 <html lang="en">
@@ -29,66 +28,95 @@
 		sells out, SOLR will find the next closest item and automatically put it into the crosssell.</p>
 	</div>
 
-	<div class="row">
-		<div class="col-md-3">
-			<div class="input-group input-group-lg">
-				<input type="text" class="form-control" placeholder="Item">
-				<span class="input-group-gtn"><button class="btn btn-default"></button></span>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<h2>Keystone Item:</h2>
+				<form ng-submit="getKeystone(keystoneInput)">
+					<div class="input input-group col-md-8">
+						<input type="text" class="form-control" ng-model="keystoneInput" placeholder="ABC1234" tabindex=1 ng-change="keystoneInputToUpper()">
+						<span class="input-group-btn"><button class="btn btn-default" ng-click="getKeystone(keystoneInput)">Find</button></span>
+					</div>
+				</form>
+				<div class="row">
+					<div class="col-md-10">
+						<h3><b>{{keystone.brand}}</b>
+							{{keystone.title}}</h3>
+
+						<a ng-href="{{keystone.url}}" class="thumbnail" target="_blank">
+							<img ng-src="{{keystone.imageUrl}}">
+						</a> 
+					</div>
+				</div>
+				<div class="row col-md-10">
+					<button class="col-md-8 col-md-offset-4 btn btn-success btn-lg" ng-click="resetKeystone()" tabindex=5>Save</button>
+				</div>
+			</div>
+
+			<div class="row col-md-8">
+				<div class="text-center">
+					<h2>Cross Sell Terms</h2>
+				</div>
+				<div>
+					<p>In each column, type a search term that will be used to populate the cross-sell. Customers will see the top result from each column.
+					If the top items sell out, lower items will automatically be used.</p>
+					<p>Tip: Use tab to move between search boxes!</p>
+				</div>
+
+				<div class="col-md-4">
+					<form ng-submit="getRecommendation(slot1, input1)" >
+						<input type="text" class="form-control form-control-lg"  placeholder="Slot 1" ng-model="input1" ng-blur="getRecommendation(slot1, input1)" tabindex=2>
+					</form>
+
+					<div ng-repeat="item in slot1" class="col-md-8 col-md-offset-2">
+						<a ng-href="{{item.url}}" class="thumbnail headspace" target="_blank">
+							<img ng-src="{{item.imageUrl}}">
+						</a>
+						<div><b>{{item.brand}}</b></div>
+						<div>{{item.title}}</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<form ng-submit="getRecommendation(slot2, input2)" >
+						<input type="text" class="form-control form-control-lg"  placeholder="Slot 2" ng-model="input2" ng-blur="getRecommendation(slot2, input2)" tabindex=3>
+					</form>
+
+					<div ng-repeat="item in slot2" class="col-md-8 col-md-offset-2">
+						<a ng-href="{{item.url}}" class="thumbnail headspace" target="_blank">
+							<img ng-src="{{item.imageUrl}}">
+						</a>
+						<div><b>{{item.brand}}</b></div>
+						<div>{{item.title}}</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<form ng-submit="getRecommendation(slot3, input3)" >
+						<input type="text" class="form-control form-control-lg"  placeholder="Slot 3" ng-model="input3" ng-blur="getRecommendation(slot3, input3)" tabindex=4>
+					</form>
+
+					<div ng-repeat="item in slot3" class="col-md-8 col-md-offset-2">
+						<a ng-href="{{item.url}}" class="thumbnail headspace" target="_blank">
+							<img ng-src="{{item.imageUrl}}">
+						</a>
+						<div><b>{{item.brand}}</b></div>
+						<div>{{item.title}}</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="row col-md-9">
-			<div class="text-center">
-				<h2>Cross Sell Preview</h2>
-			</div>
 
-			<div class="col-md-4">
-				<div class="input-group input-group-lg">
-					<input type="text" class="form-control"  placeholder="Search Terms" ng-model="input1">
-					<span class="input-group-btn"><button class="btn btn-success" ng-click="getRecommendation(slot1, input1)">Go</button></span>
-				</div>
-
-				<div ng-repeat="item in slot1" class="col-md-8 col-md-offset-2">
-					<a ng-href="http://www.backcountry.com/{{item.url}}" class="thumbnail headspace" target="_blank">
-						<img ng-src="http://www.backcountry.com/{{item.imageUrl}}">
-					</a>
-					<div><b>{{item.brand}}</b></div>
-					<div>{{item.title}}</div>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="input-group input-group-lg">
-					<input type="text" class="form-control"  placeholder="Search Terms" ng-model="input2">
-					<span class="input-group-btn"><button class="btn btn-success" ng-click="getRecommendation(slot2, input2)">Go</button></span>
-				</div>
-				<div ng-repeat="item in slot2">
-					<h4>{{item.title}}</h4>
-					<a ng-href="http://www.backcountry.com/{{item.url}}" class="thumbnail" target="_blank">
-						<img ng-src="http://www.backcountry.com/{{item.imageUrl}}">
-					</a>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="input-group input-group-lg">
-					<input type="text" class="form-control"  placeholder="Search Terms" ng-model="input3">
-					<span class="input-group-btn"><button class="btn btn-success" ng-click="getRecommendation(slot3, input3)">Go</button></span>
-				</div>
-				<div ng-repeat="item in slot3" class="headspace">
-					<h4>{{item.title}}</h4>
-					<a ng-href="http://www.backcountry.com/{{item.url}}" class="thumbnail" target="_blank">
-						<img ng-src="http://www.backcountry.com/{{item.imageUrl}}">
-					</a>
-				</div>
-			</div>
+		<!--end body container-->
+	</div>
+	<div class="footer headspace">
+		<div class="container">
+			<p class="text-muted">A preview of things to come</p>
 		</div>
-
-
-
-
 	</div>
 </div>
+
 
 
 
