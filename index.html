@@ -1,0 +1,98 @@
+<!doctype HTML>
+
+<!--   Find this page at localhost:8090   -->
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="customStyles.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js"></script>
+<script src="app.js"></script>
+</head>
+
+<body ng-app="xsellMockApp" ng-controller="xsellMockController">
+
+<div class="container">
+	<div class="header">
+		<h3 class="text-muted">Mock only! This is Not Real!</h3>
+	</div>
+
+	<div class="jumbotron">
+		<h1>CrossSell Builder 2.0</h1>
+		<p class="lead">In the world of tomorrow, you never have to look up skus to build a cross sell. You just save a description of what you want to go in each slot.
+		SOLR, the search engine that powers search on our website, is then responsible for finding the best item to match your description. The best part is, if the best match
+		sells out, SOLR will find the next closest item and automatically put it into the crosssell.</p>
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+			<div class="input-group input-group-lg">
+				<input type="text" class="form-control" placeholder="Item">
+				<span class="input-group-gtn"><button class="btn btn-default"></button></span>
+			</div>
+		</div>
+
+		<div class="row col-md-9">
+			<div class="text-center">
+				<h2>Cross Sell Preview</h2>
+			</div>
+
+			<div class="col-md-4">
+				<div class="input-group input-group-lg">
+					<input type="text" class="form-control"  placeholder="Search Terms" ng-model="input1">
+					<span class="input-group-btn"><button class="btn btn-success" ng-click="getRecommendation(slot1, input1)">Go</button></span>
+				</div>
+
+				<div ng-repeat="item in slot1" class="col-md-8 col-md-offset-2">
+					<a ng-href="http://www.backcountry.com/{{item.url}}" class="thumbnail headspace" target="_blank">
+						<img ng-src="http://www.backcountry.com/{{item.imageUrl}}">
+					</a>
+					<div><b>{{item.brand}}</b></div>
+					<div>{{item.title}}</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="input-group input-group-lg">
+					<input type="text" class="form-control"  placeholder="Search Terms" ng-model="input2">
+					<span class="input-group-btn"><button class="btn btn-success" ng-click="getRecommendation(slot2, input2)">Go</button></span>
+				</div>
+				<div ng-repeat="item in slot2">
+					<h4>{{item.title}}</h4>
+					<a ng-href="http://www.backcountry.com/{{item.url}}" class="thumbnail" target="_blank">
+						<img ng-src="http://www.backcountry.com/{{item.imageUrl}}">
+					</a>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="input-group input-group-lg">
+					<input type="text" class="form-control"  placeholder="Search Terms" ng-model="input3">
+					<span class="input-group-btn"><button class="btn btn-success" ng-click="getRecommendation(slot3, input3)">Go</button></span>
+				</div>
+				<div ng-repeat="item in slot3" class="headspace">
+					<h4>{{item.title}}</h4>
+					<a ng-href="http://www.backcountry.com/{{item.url}}" class="thumbnail" target="_blank">
+						<img ng-src="http://www.backcountry.com/{{item.imageUrl}}">
+					</a>
+				</div>
+			</div>
+		</div>
+
+
+
+
+	</div>
+</div>
+
+
+
+</body>
+
+
+</html>
